@@ -1,6 +1,9 @@
 package repository
 
-import "github.com/Medvedevsky/todo-app"
+import (
+	"github.com/Medvedevsky/todo-app"
+	"github.com/jmoiron/sqlx"
+)
 
 type Repository struct {
 	Autharization Autharization
@@ -23,6 +26,6 @@ type TodoList interface {
 	GetById(userId, listId int) (todo.TodoList, error)
 }
 
-func NewRepository() *Repository {
+func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{}
 }
