@@ -11,10 +11,23 @@ import (
 )
 
 func main() {
+
+	db, err := repository.NewPostgresDb(repository.Config{
+		Host:     "postgres",
+		Port:     "localhost",
+		Username: "postgres",
+		Password: "andrey5522",
+		DBName:   "todo_app",
+		SSLMode:  "disable",
+	})
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+
 	if err := initConfig(); err != nil {
 		log.Fatalf("ошибка при чтении конфига %s", err.Error())
 	}
-	rep := repository.NewRepository()
+	rep := repository.NewRepository(db)
 	service := service.NewService(rep)
 	handler := handler.NewHandler(service)
 	srv := new(todo.Server)
