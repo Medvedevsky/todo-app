@@ -32,7 +32,8 @@ type TodoList interface {
 
 func NewService(rep *repository.Repository) *Service {
 	return &Service{
-		TodoList: NewTodoListService(rep.TodoList),
-		TodoItem: NewTodoItemService(rep.TodoItem),
+		TodoList:      NewTodoListService(rep.TodoList),
+		TodoItem:      NewTodoItemService(rep.TodoItem),
+		Autharization: NewAutharizationService(rep.Autharization),
 	}
 }
